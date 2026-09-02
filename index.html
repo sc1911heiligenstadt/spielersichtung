@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>🔍 Spielersichtung</title>
+<meta name="theme-color" content="#1a56a0" />
+<link rel="stylesheet" href="style.css?v=1.0" />
+</head>
+<body>
+
+  <div class="connect-screen" id="connect-screen">
+    <div class="card">
+      <h2>🔍 Spielersichtung</h2>
+      <p id="connect-message">Bitte über die Tools-Übersicht anmelden, um auf die Spielersichtung zuzugreifen.</p>
+      <div class="btn-row">
+        <a class="btn" href="https://sc1911heiligenstadt.github.io/ToolsUebersicht/">Zur Tools-Übersicht</a>
+      </div>
+      <p class="muted" id="cloud-error" style="margin-top:14px;"></p>
+    </div>
+  </div>
+
+  <div id="app-shell" style="display:none;">
+    <header>
+      <h1>🔍 Spielersichtung</h1>
+      <a href="https://sc1911heiligenstadt.github.io/ToolsUebersicht/" class="back-to-dashboard">← Zurück zum Dashboard</a>
+      <div class="header-right">
+        <span class="header-status" id="save-status"></span>
+        <span class="header-user" id="header-user"></span>
+        <img class="header-logo" src="https://sc1911heiligenstadt.github.io/logo.svg" alt="1. SC 1911 Heiligenstadt e.V." />
+      </div>
+    </header>
+
+    <nav>
+      <button data-tab="spieler" class="active">Spieler</button>
+      <button data-tab="vereine">Vereine</button>
+      <div class="nav-right">
+        <button data-tab="info">Info</button>
+      </div>
+    </nav>
+
+    <main>
+
+      <section class="tab-section active" id="tab-spieler">
+        <div class="import-banner hidden" id="import-banner">
+          <p>Es sind noch keine Spieler erfasst. Bestehende Daten (als JSON-Datei) können einmalig importiert werden.</p>
+          <button class="btn success" id="btn-import-seed">Datendatei auswählen…</button>
+          <input type="file" id="import-file-input" accept="application/json" class="hidden" />
+        </div>
+
+        <div class="card">
+          <div class="filter-bar">
+            <input type="search" id="spieler-search" placeholder="Suche nach Name oder Verein…" />
+            <select id="filter-status">
+              <option value="">Alle Status</option>
+              <option value="neu">🆕 Neu gesichtet</option>
+              <option value="kontakt">📞 Kontakt läuft</option>
+              <option value="probetraining">🏃 Probetraining bestätigt</option>
+              <option value="gewechselt">✅ Gewechselt</option>
+              <option value="abgesagt">❌ Kein Wechsel</option>
+            </select>
+            <select id="filter-zustaendigkeit"><option value="">Alle Zuständigen</option></select>
+            <select id="filter-position"><option value="">Alle Positionen</option></select>
+            <span class="filter-count" id="spieler-count"></span>
+          </div>
+
+          <div class="list-row-header">
+            <span>Name</span><span>Verein</span><span>Position</span><span>Status</span><span>Zuständig</span><span></span>
+          </div>
+          <div class="list-rows" id="spieler-list"></div>
+          <div class="empty-state hidden" id="spieler-empty">Keine Spieler gefunden.</div>
+        </div>
+
+        <button class="btn secondary" id="btn-export-toggle">CSV-Export…</button>
+        <button class="btn" id="btn-new-spieler">+ Neuer Spieler</button>
+
+        <div id="export-panel" class="card" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:10px;">
+            <h3 style="margin:0;">CSV-Export – Felder auswählen</h3>
+            <div class="btn-row" style="justify-content:flex-end;">
+              <button class="btn secondary small" id="btn-export-felder-alle">Alle</button>
+              <button class="btn secondary small" id="btn-export-felder-keine">Keine</button>
+            </div>
+          </div>
+          <div id="export-field-groups"></div>
+          <p class="muted" id="export-info-line" style="margin:10px 0 14px;"></p>
+          <button class="btn success small" id="btn-export-csv">CSV exportieren</button>
+        </div>
+      </section>
+
+      <section class="tab-section" id="tab-vereine">
+        <div class="card">
+          <div class="filter-bar">
+            <input type="search" id="verein-search" placeholder="Suche nach Vereinsname oder Ort…" />
+            <span class="filter-count" id="verein-count"></span>
+          </div>
+          <div class="list-rows" id="verein-list"></div>
+          <div class="empty-state hidden" id="verein-empty">Keine Vereine erfasst.</div>
+        </div>
+
+        <button class="btn" id="btn-new-verein">+ Neuer Verein</button>
+      </section>
+
+      <!-- ---------- Info ---------- -->
+      <section class="tab-section" id="tab-info">
+        <div class="card">
+          <h2>Über diese App <span class="version-badge" id="version-badge-2"></span></h2>
+          <p class="muted">
+            Scouting-Tracker für beobachtete Spieler und deren Vereine.
+            Festgehalten wird der ganze Vorgang: von der Beobachtung über die Gespräche mit Verein und
+            Eltern bis zum Probetraining und der Rückmeldung danach.
+            Hier stehen personenbezogene Daten von Spielern, oft Minderjährigen, die noch bei einem
+            anderen Verein spielen. Ein Eintrag ist deshalb ein Arbeitsstand, kein Archiv — was nicht
+            mehr gebraucht wird, gehört gelöscht.
+          </p>
+          <p class="muted" id="einstellungen-user"></p>
+        </div>
+        <div class="card">
+          <h2>Änderungen</h2>
+          <div id="changelog-list"></div>
+        </div>
+      
+      <div class="card" id="ds-info-karte">
+        <h2>Datenschutz</h2>
+        <p>Dieses Werkzeug gehört zu den internen Anwendungen des
+        1. SC 1911 Heiligenstadt. Die hier erfassten Daten werden
+        ausschließlich für die Vereinsarbeit verwendet und liegen auf Servern
+        in Deutschland, die ein Auftragsverarbeiter für den Verein betreibt.
+        Eine Weitergabe an Dritte findet nur statt, soweit sie für den
+        jeweiligen Zweck erforderlich oder gesetzlich vorgeschrieben ist.</p>
+        <p>Verantwortlich ist der 1. SC 1911 Heiligenstadt, Leineberg 2,
+        37308 Heilbad Heiligenstadt, Telefon 03606 612206,
+        <a href="mailto:info@sc1911-heiligenstadt.de">info@sc1911-heiligenstadt.de</a>.
+        Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung,
+        Datenübertragbarkeit und Widerspruch lassen sich unter dieser
+        Anschrift geltend machen. Beschwerden nimmt der Thüringer
+        Landesbeauftragte für den Datenschutz und die Informationsfreiheit
+        entgegen.</p>
+        <p><a href="https://www.sc1911-heiligenstadt.de/datenschutz/" target="_blank" rel="noopener">Datenschutzerklärung des Vereins</a>
+        &middot;
+        <a href="https://www.sc1911-heiligenstadt.de/impressum-2/" target="_blank" rel="noopener">Impressum</a></p>
+      </div>
+</section>
+
+    </main>
+  </div>
+
+  <!-- Spieler-Detail/Formular -->
+  <div class="modal-overlay hidden" id="spieler-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="spieler-modal-title">Neuer Spieler</h2>
+        <button class="modal-close" id="spieler-modal-close" aria-label="Schließen">×</button>
+      </div>
+      <div class="modal-body">
+        <form id="spieler-form">
+          <div class="form-section">
+            <div class="form-section-title">Person</div>
+            <div class="form-grid">
+              <div class="form-field"><label>Nachname *</label><input type="text" id="pf-nachname" required /></div>
+              <div class="form-field"><label>Vorname</label><input type="text" id="pf-vorname" /></div>
+              <div class="form-field"><label>Geschlecht</label>
+                <select id="pf-geschlecht"><option value="m">männlich</option><option value="w">weiblich</option></select>
+              </div>
+              <div class="form-field"><label>Geburtsdatum</label><input type="text" id="pf-geburtsdatum" placeholder="TT.MM.JJJJ oder Jahrgang" /></div>
+              <div class="form-field"><label>Verein</label><input type="text" id="pf-verein" list="dl-vereine" /></div>
+              <div class="form-field"><label>Position</label><input type="text" id="pf-position" list="dl-positionen" /></div>
+              <div class="form-field"><label>Trikotnummer</label><input type="text" id="pf-trikotnummer" /></div>
+              <div class="form-field"><label>Passnummer</label><input type="text" id="pf-passnummer" /></div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-title">Stützpunkt</div>
+            <div class="form-grid">
+              <div class="form-field"><label class="checkbox-label"><input type="checkbox" id="pf-stuetzpunktSpieler" /> Ist Stützpunktspieler</label></div>
+              <div class="form-field"><label>Stützpunkt</label><input type="text" id="pf-stuetzpunkt" list="dl-stuetzpunkte" /></div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-title">Scouting</div>
+            <div class="form-grid">
+              <div class="form-field"><label>Sichtung durch</label><input type="text" id="pf-sichtungDurch" list="dl-personen" /></div>
+            </div>
+            <div class="form-field wide">
+              <label>Bemerkungen</label>
+              <div class="field-with-btn">
+                <textarea id="pf-bemerkungen"></textarea>
+                <button type="button" class="btn secondary small" data-append="pf-bemerkungen">+ Eintrag</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-title">Kontaktverlauf</div>
+            <div class="form-grid">
+              <div class="form-field"><label>Zuständigkeit</label><input type="text" id="pf-zustaendigkeit" list="dl-zustaendigkeit" /></div>
+              <div class="form-field"><label>Kontakt durch wen?</label><input type="text" id="pf-kontaktDurchWen" /></div>
+            </div>
+            <div class="form-field wide">
+              <label>Kontakt mit Verein</label>
+              <div class="field-with-btn">
+                <textarea id="pf-kontaktMitVerein"></textarea>
+                <button type="button" class="btn secondary small" data-append="pf-kontaktMitVerein">+ Eintrag</button>
+              </div>
+            </div>
+            <div class="form-field wide">
+              <label>Kontakt mit Eltern</label>
+              <div class="field-with-btn">
+                <textarea id="pf-kontaktMitEltern"></textarea>
+                <button type="button" class="btn secondary small" data-append="pf-kontaktMitEltern">+ Eintrag</button>
+              </div>
+            </div>
+            <div class="form-field wide">
+              <label>Rückinfo nach der Einladung</label>
+              <div class="field-with-btn">
+                <textarea id="pf-rueckinfoNachEinladung"></textarea>
+                <button type="button" class="btn secondary small" data-append="pf-rueckinfoNachEinladung">+ Eintrag</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-title">Probetraining &amp; Entscheidung</div>
+            <div class="form-grid">
+              <div class="form-field"><label>Probetraining am</label><input type="text" id="pf-probetrainingAm" /></div>
+              <div class="form-field"><label>Zusage Probetraining</label><input type="text" id="pf-zusageProbetraining" list="dl-ja-nein" /></div>
+              <div class="form-field"><label>Wechsel</label><input type="text" id="pf-wechsel" list="dl-ja-nein" /></div>
+              <div class="form-field"><label>Letzte Bearbeitung</label><input type="text" id="pf-letzteBearbeitung" disabled /></div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn danger hidden" id="btn-delete-spieler">Löschen</button>
+        <div class="btn-row">
+          <button class="btn secondary" id="btn-cancel-spieler">Abbrechen</button>
+          <button class="btn success" id="btn-save-spieler">Speichern</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vereins-Detail/Formular -->
+  <div class="modal-overlay hidden" id="verein-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="verein-modal-title">Neuer Verein</h2>
+        <button class="modal-close" id="verein-modal-close" aria-label="Schließen">×</button>
+      </div>
+      <div class="modal-body">
+        <form id="verein-form">
+          <div class="form-section">
+            <div class="form-grid">
+              <div class="form-field wide"><label>Vereinsname *</label><input type="text" id="cf-name" required /></div>
+              <div class="form-field"><label>Straße</label><input type="text" id="cf-strasse" /></div>
+              <div class="form-field"><label>PLZ</label><input type="text" id="cf-plz" /></div>
+              <div class="form-field"><label>Ort</label><input type="text" id="cf-ort" /></div>
+              <div class="form-field"><label>Website</label><input type="text" id="cf-website" /></div>
+            </div>
+          </div>
+          <div class="form-section">
+            <div class="form-section-title">Ansprechpartner</div>
+            <div id="kontakte-list"></div>
+            <button type="button" class="btn secondary small" id="btn-add-kontakt">+ Ansprechpartner hinzufügen</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn danger hidden" id="btn-delete-verein">Löschen</button>
+        <div class="btn-row">
+          <button class="btn secondary" id="btn-cancel-verein">Abbrechen</button>
+          <button class="btn success" id="btn-save-verein">Speichern</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <datalist id="dl-vereine"></datalist>
+  <datalist id="dl-positionen"></datalist>
+  <datalist id="dl-stuetzpunkte"></datalist>
+  <datalist id="dl-personen"></datalist>
+  <datalist id="dl-zustaendigkeit"></datalist>
+  <datalist id="dl-ja-nein">
+    <option value="Ja"></option>
+    <option value="Nein"></option>
+    <option value="Nein (vorerst)"></option>
+  </datalist>
+
+  <script src="config.js?v=1.0"></script>
+  <script src="db.js?v=1.0"></script>
+  <script src="app.js?v=1.0"></script>
+</body>
+</html>
