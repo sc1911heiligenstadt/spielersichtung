@@ -11,16 +11,31 @@ Probetraining und der Rückmeldung danach.
 
 | Reiter | Wofür |
 |---|---|
-| **Spieler** | Die beobachteten Spieler mit ihrem Stand |
+| **Spieler** | Die beobachteten Spieler mit ihrem Stand — Suche über Name und Verein, Filter nach Status, Zuständigkeit und Position, dazu der CSV-Export |
 | **Vereine** | Die Vereine, aus denen sie kommen — durchsuchbar nach Name und Ort |
+| **Info** | Was die App tut, die Änderungen und der Datenschutz-Hinweis |
 
 ## Was zu einem Spieler festgehalten wird
 
-Name, **Geburtsdatum**, **Geschlecht**, **PLZ** und **Ort**, **Passnummer**,
-**Position** und **Bemerkungen**. Dazu der Verlauf des Kontakts: **Kontakt durch
-wen?**, **Kontakt mit Verein**, **Kontakt mit Eltern**, **Probetraining am** und
-die **Rückinfo nach der Einladung**. Jeder Eintrag trägt, wann er zuletzt
-bearbeitet wurde.
+Name, **Geburtsdatum**, **Geschlecht**, **Verein**, **Position**,
+**Trikotnummer** und **Passnummer**, dazu ob der Spieler **Stützpunktspieler**
+ist und an welchem Stützpunkt. Für das Scouting: **Sichtung durch** und
+**Bemerkungen**. Dazu der Verlauf des Kontakts: **Zuständigkeit**, **Kontakt
+durch wen?**, **Kontakt mit Verein**, **Kontakt mit Eltern** und die **Rückinfo
+nach der Einladung** — und schließlich **Probetraining am**, **Zusage
+Probetraining** und **Wechsel**. Jeder Eintrag trägt, wann er zuletzt bearbeitet
+wurde; dieses Datum setzt die App selbst.
+
+Der **Status** ergibt sich daraus von allein: neu gesichtet, Kontakt läuft,
+Probetraining bestätigt, gewechselt oder kein Wechsel.
+
+Die Anschrift — Straße, PLZ und Ort — steht beim **Verein**, nicht beim Spieler.
+
+## CSV-Export
+
+Die Spielerliste lässt sich als CSV herausgeben, frei zusammenstellbar: jedes
+Feld ist einzeln an- und abwählbar. Der Export übernimmt die gerade eingestellte
+Suche und Filterung — was auf dem Bildschirm steht, steht auch in der Datei.
 
 ## Sensible Daten
 
@@ -38,9 +53,14 @@ noch bei einem anderen Verein spielen. Entsprechend gilt:
 
 Die Anmeldung läuft über die [Tools-Übersicht](https://sc1911heiligenstadt.github.io/ToolsUebersicht/) — dort einmal anmelden, danach ist dieses Werkzeug offen.
 
-Die Rechte gelten in drei Stufen: **Sehen** (Einträge ansehen), **Bearbeiten**
-(Spieler und Vereine pflegen) und **Administrieren**. Wer welche Stufe hat,
-legt die Tools-Übersicht fest.
+Die Rechte gelten in zwei Stufen: **Sehen** (Spielerliste, Detailansicht und
+Vereinsverzeichnis, schreibgeschützt) und **Bearbeiten** (Spieler und Vereine
+anlegen, ändern und löschen — dazu der CSV-Export). Wer welche Stufe hat, legt
+die Tools-Übersicht fest. Der Reiter *Info* ist für alle sichtbar.
+
+Fällt die Anmeldung weg, während die App offen ist, wird der Bildschirm geräumt
+— die Seite und auch die Dialoge daneben. Es bleibt kein Name im Browser
+zurück.
 
 ## Lokal starten
 

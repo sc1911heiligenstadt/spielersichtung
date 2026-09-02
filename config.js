@@ -56,60 +56,12 @@ const EXPORT_FIELD_GROUPS = [
 
 const APP_CHANGELOG = [
   {
-    version: "1.4",
-    groups: [
-      {
-        title: "Der Reiter „Info“ erklärt jetzt, was die App wirklich tut",
-        items: [
-          "Dort stand bisher ein einzelner Satz. Jetzt steht da, wofür die einzelnen Reiter da sind, was die App mit den Eingaben macht und wo etwas anderes hingehört.",
-          "Am Funktionsumfang ändert sich nichts — nur an der Beschreibung."
-        ]
-      }
-    ]
-  },
-  {
-    version: "1.3",
-    groups: [
-      {
-        title: "Beim Sitzungsende wird auch alles neben der Seite geräumt",
-        items: [
-          "Beim Sitzungsende wurde die Seite bereits geleert. Der Spieler-Dialog und der Verein-Dialog stehen aber daneben und blieben mit Namen und Notizen stehen. Jetzt werden sie mitgeleert.",
-          "Der Hinweis erscheint außerdem an jeder Stelle, an der die Anmeldung wegfällt — vorher nur bei einem Teil der Wege."
-        ]
-      }
-    ]
-  },
-  {
-    version: "1.2",
-    groups: [
-      {
-        title: "Beim Abmelden bleibt nichts stehen",
-        items: [
-          "Läuft die Anmeldung ab, während die App offen ist — zum Beispiel weil ein Speichern nach längerer Pause fehlschlägt —, erscheint wie bisher der Hinweis „bitte neu anmelden“.",
-          "Neu ist: der Bildschirm dahinter wird jetzt auch geleert. Vorher wurde er nur unsichtbar gemacht, und alles Angezeigte blieb im Browser stehen — sichtbar für jeden, der sich an denselben Rechner setzt und nachschaut.",
-          "Für dich ändert sich nichts: der Weg zurück war schon immer ein Neuladen der Seite."
-        ]
-      }
-    ]
-  },
-  {
-    version: "1.1",
-    groups: [
-      {
-        title: "Am Handy",
-        items: [
-          "Bisher brach die Reiterleiste selbst um, die rechte Reiter-Gruppe darin aber nicht: Sie rutschte als ein Stück in die zweite Zeile und lief dort weiter über den rechten Rand hinaus. Jetzt bricht auch sie um, sobald sie zu breit wird. Zu sehen ist das nur, wenn genug Reiter nebeneinanderstehen — bis dahin sieht alles aus wie bisher."
-        ]
-      }
-    ]
-  },
-  {
     version: "1.0",
     groups: [
       {
         title: "Spieler-Sichtungen",
         items: [
-          "Liste aller gesichteten Nachwuchsspieler mit Suche und Filtern nach Verein, Position, Status und Zuständigkeit.",
+          "Liste aller gesichteten Nachwuchsspieler mit einer Suche über Name und Verein sowie Filtern nach Status, Zuständigkeit und Position.",
           "Detailformular je Spieler: Person, Stützpunkt, Scouting-Einschätzung, Kontaktverlauf, Probetraining und Wechsel-Entscheidung.",
           "„Sichtung durch“ und „Zuständigkeit“ sind bei einem neuen Spieler mit dem eigenen Namen vorbelegt und bleiben änderbar.",
           "Der Status ergibt sich von selbst aus dem Stand des Vorgangs: neu gesichtet, Kontakt läuft, Probetraining bestätigt, gewechselt oder kein Wechsel.",
@@ -119,7 +71,8 @@ const APP_CHANGELOG = [
       {
         title: "Vereinsverzeichnis",
         items: [
-          "Kontaktdaten der gescouteten Vereine mit Adresse, Website und mehreren Ansprechpartnern je Verein."
+          "Kontaktdaten der gescouteten Vereine mit Anschrift, Website und mehreren Ansprechpartnern je Verein.",
+          "Suche über Vereinsname und Ort."
         ]
       },
       {
@@ -141,6 +94,7 @@ const APP_CHANGELOG = [
         title: "Bedienung am Handy",
         items: [
           "Die Ansicht ist für das Handy gebaut und funktioniert dort vollständig.",
+          "Die Reiterleiste bricht am Handy um, statt seitlich aus dem Bild zu laufen.",
           "Eingabefelder sind mindestens 16 Pixel groß, damit der iPhone-Browser beim Antippen nicht ungefragt in die Seite hineinzoomt und verschoben stehen bleibt."
         ]
       },
@@ -150,6 +104,8 @@ const APP_CHANGELOG = [
           "Gespeichert wird in der Vereins-Nextcloud über die zentrale Anmeldung der Tools-Übersicht — ein eigenes Passwort braucht es nicht.",
           "Im Kopfbereich steht sichtbar, ob der letzte Stand gespeichert wurde.",
           "Das Speichern startet ohne Verzögerung. Wird die Seite geschlossen, bevor die Bestätigung da ist, geht der Stand trotzdem noch raus — und es kommt eine Rückfrage, falls das einmal nicht mehr möglich ist.",
+          "Ist noch kein Spieler erfasst, lässt sich ein vorhandener Bestand einmalig aus einer JSON-Datei einlesen.",
+          "Fällt die Anmeldung weg, während die App offen ist, wird der Bildschirm geräumt — die Seite selbst und auch der Spieler- und der Verein-Dialog daneben. Es bleibt kein Name und keine Notiz im Browser zurück, und jeder Weg führt auf den Hinweis, sich neu anzumelden.",
           "Ändern zwei Geräte gleichzeitig denselben Stand, erkennt die App das und meldet es."
         ]
       }
