@@ -157,16 +157,16 @@
           <div class="form-section">
             <div class="form-section-title">Person</div>
             <div class="form-grid">
-              <div class="form-field"><label>Nachname *</label><input type="text" id="pf-nachname" required /></div>
-              <div class="form-field"><label>Vorname</label><input type="text" id="pf-vorname" /></div>
-              <div class="form-field"><label>Geschlecht</label>
+              <div class="form-field"><label for="pf-nachname">Nachname *</label><input type="text" id="pf-nachname" required /></div>
+              <div class="form-field"><label for="pf-vorname">Vorname</label><input type="text" id="pf-vorname" /></div>
+              <div class="form-field"><label for="pf-geschlecht">Geschlecht</label>
                 <select id="pf-geschlecht"><option value="m">männlich</option><option value="w">weiblich</option></select>
               </div>
-              <div class="form-field"><label>Geburtsdatum</label><input type="text" id="pf-geburtsdatum" placeholder="TT.MM.JJJJ oder Jahrgang" /></div>
-              <div class="form-field"><label>Verein</label><input type="text" id="pf-verein" list="dl-vereine" /></div>
-              <div class="form-field"><label>Position</label><input type="text" id="pf-position" list="dl-positionen" /></div>
-              <div class="form-field"><label>Trikotnummer</label><input type="text" id="pf-trikotnummer" /></div>
-              <div class="form-field"><label>Passnummer</label><input type="text" id="pf-passnummer" /></div>
+              <div class="form-field"><label for="pf-geburtsdatum">Geburtsdatum</label><input type="text" id="pf-geburtsdatum" placeholder="TT.MM.JJJJ oder Jahrgang" /></div>
+              <div class="form-field"><label for="pf-verein">Verein</label><input type="text" id="pf-verein" list="dl-vereine" /></div>
+              <div class="form-field"><label for="pf-position">Position</label><input type="text" id="pf-position" list="dl-positionen" /></div>
+              <div class="form-field"><label for="pf-trikotnummer">Trikotnummer</label><input type="text" id="pf-trikotnummer" /></div>
+              <div class="form-field"><label for="pf-passnummer">Passnummer</label><input type="text" id="pf-passnummer" /></div>
             </div>
           </div>
 
@@ -174,14 +174,14 @@
             <div class="form-section-title">Stützpunkt</div>
             <div class="form-grid">
               <div class="form-field"><label class="checkbox-label"><input type="checkbox" id="pf-stuetzpunktSpieler" /> Ist Stützpunktspieler</label></div>
-              <div class="form-field"><label>Stützpunkt</label><input type="text" id="pf-stuetzpunkt" list="dl-stuetzpunkte" /></div>
+              <div class="form-field"><label for="pf-stuetzpunkt">Stützpunkt</label><input type="text" id="pf-stuetzpunkt" list="dl-stuetzpunkte" /></div>
             </div>
           </div>
 
           <div class="form-section">
             <div class="form-section-title">Scouting</div>
             <div class="form-grid">
-              <div class="form-field"><label>Sichtung durch</label><input type="text" id="pf-sichtungDurch" list="dl-personen" /></div>
+              <div class="form-field"><label for="pf-sichtungDurch">Sichtung durch</label><input type="text" id="pf-sichtungDurch" list="dl-personen" /></div>
             </div>
             <div class="form-field wide">
               <label>Bemerkungen</label>
@@ -195,8 +195,8 @@
           <div class="form-section">
             <div class="form-section-title">Kontaktverlauf</div>
             <div class="form-grid">
-              <div class="form-field"><label>Zuständigkeit</label><input type="text" id="pf-zustaendigkeit" list="dl-zustaendigkeit" /></div>
-              <div class="form-field"><label>Kontakt durch wen?</label><input type="text" id="pf-kontaktDurchWen" /></div>
+              <div class="form-field"><label for="pf-zustaendigkeit">Zuständigkeit</label><input type="text" id="pf-zustaendigkeit" list="dl-zustaendigkeit" /></div>
+              <div class="form-field"><label for="pf-kontaktDurchWen">Kontakt durch wen?</label><input type="text" id="pf-kontaktDurchWen" /></div>
             </div>
             <div class="form-field wide">
               <label>Kontakt mit Verein</label>
@@ -224,10 +224,10 @@
           <div class="form-section">
             <div class="form-section-title">Probetraining &amp; Entscheidung</div>
             <div class="form-grid">
-              <div class="form-field"><label>Probetraining am</label><input type="text" id="pf-probetrainingAm" /></div>
-              <div class="form-field"><label>Zusage Probetraining</label><input type="text" id="pf-zusageProbetraining" list="dl-ja-nein" /></div>
-              <div class="form-field"><label>Wechsel</label><input type="text" id="pf-wechsel" list="dl-ja-nein" /></div>
-              <div class="form-field"><label>Letzte Bearbeitung</label><input type="text" id="pf-letzteBearbeitung" disabled /></div>
+              <div class="form-field"><label for="pf-probetrainingAm">Probetraining am</label><input type="text" id="pf-probetrainingAm" /></div>
+              <div class="form-field"><label for="pf-zusageProbetraining">Zusage Probetraining</label><input type="text" id="pf-zusageProbetraining" list="dl-ja-nein" /></div>
+              <div class="form-field"><label for="pf-wechsel">Wechsel</label><input type="text" id="pf-wechsel" list="dl-ja-nein" /></div>
+              <div class="form-field"><label for="pf-letzteBearbeitung">Letzte Bearbeitung</label><input type="text" id="pf-letzteBearbeitung" disabled /></div>
             </div>
           </div>
         </form>
@@ -253,11 +253,11 @@
         <form id="verein-form">
           <div class="form-section">
             <div class="form-grid">
-              <div class="form-field wide"><label>Vereinsname *</label><input type="text" id="cf-name" required /></div>
-              <div class="form-field"><label>Straße</label><input type="text" id="cf-strasse" /></div>
-              <div class="form-field"><label>PLZ</label><input type="text" id="cf-plz" /></div>
-              <div class="form-field"><label>Ort</label><input type="text" id="cf-ort" /></div>
-              <div class="form-field"><label>Website</label><input type="text" id="cf-website" /></div>
+              <div class="form-field wide"><label for="cf-name">Vereinsname *</label><input type="text" id="cf-name" required /></div>
+              <div class="form-field"><label for="cf-strasse">Straße</label><input type="text" id="cf-strasse" /></div>
+              <div class="form-field"><label for="cf-plz">PLZ</label><input type="text" id="cf-plz" /></div>
+              <div class="form-field"><label for="cf-ort">Ort</label><input type="text" id="cf-ort" /></div>
+              <div class="form-field"><label for="cf-website">Website</label><input type="text" id="cf-website" /></div>
             </div>
           </div>
           <div class="form-section">
