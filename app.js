@@ -291,13 +291,37 @@ function renderAll() {
 }
 
 // ---------- Spieler-Formular ----------
+// Sperrt/entsperrt das Spieler-Formular für die Nur-Sehen-Rolle.
+// ⚠️ "Sehen" heißt schreibgeschützt, nicht "reagiert gar nicht" (Bugfix
+// 2026-09-05): openSpielerModal stieg für Nur-Seher in der ersten Zeile aus.
+// Die Liste wurde trotzdem für alle gerendert, jede Zeile blieb anklickbar --
+// ein Nur-Seher tippte auf einen Spieler und es passierte NICHTS: kein Dialog,
+// keine Meldung, kein Grund. Der Info-Reiter versprach dieser Rolle aber
+// ausdrücklich "Spielerliste, Detailansicht und Vereinsverzeichnis,
+// schreibgeschützt". Muster übernommen aus abwesenheitskalender/app.js
+// (openTerminModalReadOnly + setFormDisabled).
+function setSpielerFormDisabled(disabled) {
+  PLAYER_FIELDS.forEach((f) => {
+    const el = document.getElementById("pf-" + f);
+    if (el) el.disabled = disabled;
+  });
+  // Die "+ Eintrag"-Knöpfe schreiben direkt in die Textfelder — sie müssen mit
+  // weg, sonst wäre der Save-Knopf zwar fort, das Feld aber weiter befüllbar.
+  document.querySelectorAll("#spieler-form [data-append]").forEach((b) => b.classList.toggle("hidden", disabled));
+  document.getElementById("btn-save-spieler").classList.toggle("hidden", disabled);
+  document.getElementById("btn-cancel-spieler").textContent = disabled ? "Schließen" : "Abbrechen";
+}
+
 function openSpielerModal(id) {
-  if (!canEdit()) return;
+  // Neu anlegen bleibt Bearbeitern vorbehalten (der Knopf ist für Nur-Seher
+  // ohnehin ausgeblendet) -- ein leeres, gesperrtes Formular wäre sinnlos.
+  if (!id && !canEdit()) return;
+  const nurLesen = !canEdit();
   editingPlayerId = id || null;
   const isNew = !id;
   const player = isNew ? null : appData.players.find((p) => p.id === id);
   document.getElementById("spieler-modal-title").textContent = isNew ? "Neuer Spieler" : `${player.nachname}${player.vorname ? ", " + player.vorname : ""}`;
-  document.getElementById("btn-delete-spieler").classList.toggle("hidden", isNew);
+  document.getElementById("btn-delete-spieler").classList.toggle("hidden", isNew || nurLesen);
   // Bei einem neuen Eintrag "Sichtung durch"/"Zuständigkeit" mit dem eingeloggten
   // Nutzer vorbelegen (wer die Sichtung tatsächlich einträgt), statt leer zu lassen —
   // bleibt editierbar, falls im Namen einer anderen Person erfasst wird.
@@ -310,12 +334,14 @@ function openSpielerModal(id) {
     else el.value = player ? (player[f] || "") : (f === "geschlecht" ? "m" : "");
   });
   document.getElementById("pf-letzteBearbeitung").value = player && player.letzteBearbeitung ? isoToDisplay(player.letzteBearbeitung) : "(wird beim Speichern gesetzt)";
+  setSpielerFormDisabled(nurLesen);
   document.getElementById("spieler-modal").classList.remove("hidden");
-  document.getElementById("pf-nachname").focus();
+  if (!nurLesen) document.getElementById("pf-nachname").focus();
 }
 
 function closeSpielerModal() {
   document.getElementById("spieler-modal").classList.add("hidden");
+  setSpielerFormDisabled(false);
   editingPlayerId = null;
 }
 
@@ -377,25 +403,42 @@ function renderKontakteRows(kontakte) {
   list.forEach((k) => container.appendChild(buildKontaktRow(k)));
 }
 
+const CLUB_FIELD_IDS = ["cf-name", "cf-strasse", "cf-plz", "cf-ort", "cf-website"];
+
+// Gegenstück zu setSpielerFormDisabled für das Vereins-Formular. ⚠️ Muss NACH
+// renderKontakteRows laufen: die Ansprechpartner-Zeilen werden dort frisch
+// gebaut, ein vorher gesetztes disabled wäre wieder weg.
+function setVereinFormDisabled(disabled) {
+  CLUB_FIELD_IDS.forEach((id) => { const el = document.getElementById(id); if (el) el.disabled = disabled; });
+  document.querySelectorAll("#kontakte-list input").forEach((el) => { el.disabled = disabled; });
+  document.querySelectorAll("#kontakte-list [data-remove-kontakt]").forEach((b) => b.classList.toggle("hidden", disabled));
+  document.getElementById("btn-add-kontakt").classList.toggle("hidden", disabled);
+  document.getElementById("btn-save-verein").classList.toggle("hidden", disabled);
+  document.getElementById("btn-cancel-verein").textContent = disabled ? "Schließen" : "Abbrechen";
+}
+
 function openVereinModal(id) {
-  if (!canEdit()) return;
+  if (!id && !canEdit()) return;
+  const nurLesen = !canEdit();
   editingClubId = id || null;
   const isNew = !id;
   const club = isNew ? null : appData.clubs.find((c) => c.id === id);
   document.getElementById("verein-modal-title").textContent = isNew ? "Neuer Verein" : club.name;
-  document.getElementById("btn-delete-verein").classList.toggle("hidden", isNew);
+  document.getElementById("btn-delete-verein").classList.toggle("hidden", isNew || nurLesen);
   document.getElementById("cf-name").value = club ? club.name : "";
   document.getElementById("cf-strasse").value = club ? club.strasse || "" : "";
   document.getElementById("cf-plz").value = club ? club.plz || "" : "";
   document.getElementById("cf-ort").value = club ? club.ort || "" : "";
   document.getElementById("cf-website").value = club ? club.website || "" : "";
   renderKontakteRows(club ? club.kontakte : []);
+  setVereinFormDisabled(nurLesen);
   document.getElementById("verein-modal").classList.remove("hidden");
-  document.getElementById("cf-name").focus();
+  if (!nurLesen) document.getElementById("cf-name").focus();
 }
 
 function closeVereinModal() {
   document.getElementById("verein-modal").classList.add("hidden");
+  setVereinFormDisabled(false);
   editingClubId = null;
 }
 

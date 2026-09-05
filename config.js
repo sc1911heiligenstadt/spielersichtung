@@ -56,6 +56,21 @@ const EXPORT_FIELD_GROUPS = [
 
 const APP_CHANGELOG = [
   {
+    version: "1.2",
+    groups: [
+      {
+        title: "Nur-Sehen: die Detailansicht geht jetzt wirklich auf",
+        items: [
+          "Wer nur sehen darf, tippte bisher auf eine Zeile und es passierte nichts. Kein Fenster, keine Meldung, kein Grund. Dabei stand im Info-Reiter, dass diese Rolle die Detailansicht schreibgeschützt sehen darf.",
+          "Jetzt öffnet sich das Fenster, alle Felder sind gesperrt, und Speichern, Löschen und die „+ Eintrag“-Knöpfe sind weg. Aus „Abbrechen“ wird „Schließen“.",
+          "Dasselbe gilt für das Vereinsverzeichnis samt Ansprechpartnern.",
+          "Neu anlegen bleibt Bearbeitern vorbehalten — ein leeres, gesperrtes Formular hilft niemandem.",
+          "Am CSV-Export ändert sich nichts: der bleibt bewusst hinter dem Bearbeiten-Recht."
+        ]
+      }
+    ]
+  },
+  {
     version: "1.1",
     groups: [
       {
