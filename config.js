@@ -56,6 +56,20 @@ const EXPORT_FIELD_GROUPS = [
 
 const APP_CHANGELOG = [
   {
+    version: "1.1",
+    groups: [
+      {
+        title: "„Ja, zum 01.07.“ zählt jetzt als Wechsel",
+        items: [
+          "Das Feld „Wechsel“ ist ein Freitextfeld — die Liste „Ja / Nein / Nein (vorerst)“ ist nur ein Vorschlag. Ein Zusatz hinter dem Wort war also immer möglich und üblich.",
+          "Die Nein-Seite kam damit klar, die Ja-Seite nicht: „Nein (vorerst)“ galt als Absage, „Ja, zum 01.07.2027“ dagegen zählte gar nicht. Der Spieler stand weiter als laufender Vorgang in der Liste, fehlte im Filter „Gewechselt“ und wurde bei „Probetraining bestätigt“ mitgezählt — die Zeile „N von M“ stimmte dann nicht mehr.",
+          "Auffallen konnte das kaum: Die Liste zeigt den Wechsel-Text gar nicht, nur das abgeleitete Abzeichen.",
+          "Jetzt zählt jeder Text, der mit „ja“ beginnt, als Wechsel — genauso wie „nein“ schon immer als Absage zählte."
+        ]
+      }
+    ]
+  },
+  {
     version: "1.0",
     groups: [
       {

@@ -60,7 +60,16 @@ const PLAYER_FIELDS = [
 function computeStatus(p) {
   const wechsel = (p.wechsel || "").trim().toLowerCase();
   const zusage = (p.zusageProbetraining || "").trim().toLowerCase();
-  if (wechsel === "ja") return { key: "gewechselt", label: "✅ Gewechselt" };
+  // ⚠️ Beide Zweige gleich tolerant (Bugfix 2026-09-05). Vorher war die
+  // Nein-Seite tolerant (startsWith) und die Ja-Seite exakt (===) -- pf-wechsel
+  // ist aber ein Freitextfeld mit bloßer Vorschlagsliste, kein <select>. Ein
+  // Eintrag "Ja, zum 01.07.2027" fiel dadurch durch BEIDE Zweige und landete
+  // wieder bei "Probetraining bestätigt"/"Kontakt läuft": der Spieler sah aus
+  // wie ein laufender Vorgang, obwohl er längst gewechselt war, fehlte im
+  // Filter "Gewechselt" und verfälschte die Zählung "N von M".
+  // Reihenfolge beibehalten: "ja" zuerst, sonst schlägt bei einem Text wie
+  // "ja, nein doch nicht" der falsche Zweig zu.
+  if (wechsel.startsWith("ja")) return { key: "gewechselt", label: "✅ Gewechselt" };
   if (wechsel.startsWith("nein")) return { key: "abgesagt", label: "❌ Kein Wechsel" };
   if (zusage === "ja") return { key: "probetraining", label: "🏃 Probetraining bestätigt" };
   const hatKontakt = [p.kontaktMitVerein, p.kontaktMitEltern, p.kontaktDurchWen].some((v) => (v || "").trim() !== "");
