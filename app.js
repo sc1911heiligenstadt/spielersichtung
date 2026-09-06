@@ -387,10 +387,10 @@ function buildKontaktRow(k) {
   const row = document.createElement("div");
   row.className = "kontakt-row";
   row.innerHTML = `
-    <input type="text" placeholder="Name" class="kf-name" value="${escapeHtml(k.name || "")}" />
-    <input type="text" placeholder="Funktion" class="kf-funktion" value="${escapeHtml(k.funktion || "")}" />
-    <input type="email" placeholder="E-Mail" class="kf-email" value="${escapeHtml(k.email || "")}" />
-    <input type="text" placeholder="Telefon" class="kf-telefon" value="${escapeHtml(k.telefon || "")}" />
+    <input type="text" aria-label="Name des Kontakts" placeholder="Name" class="kf-name" value="${escapeHtml(k.name || "")}" />
+    <input type="text" aria-label="Funktion des Kontakts" placeholder="Funktion" class="kf-funktion" value="${escapeHtml(k.funktion || "")}" />
+    <input type="email" aria-label="E-Mail des Kontakts" placeholder="E-Mail" class="kf-email" value="${escapeHtml(k.email || "")}" />
+    <input type="text" aria-label="Telefon des Kontakts" placeholder="Telefon" class="kf-telefon" value="${escapeHtml(k.telefon || "")}" />
     <button type="button" class="btn secondary small" data-remove-kontakt title="Ansprechpartner entfernen">✕</button>`;
   row.querySelector("[data-remove-kontakt]").addEventListener("click", () => row.remove());
   return row;

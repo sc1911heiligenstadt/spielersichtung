@@ -56,6 +56,18 @@ const EXPORT_FIELD_GROUPS = [
 
 const APP_CHANGELOG = [
   {
+    version: "1.3",
+    groups: [
+      {
+        title: "Vorleseprogramme finden die Kontaktfelder",
+        items: [
+          "Die vier Felder einer Kontaktzeile im Vereins-Formular (Name, Funktion, E-Mail, Telefon) hatten nur einen Platzhaltertext. Ein Platzhalter verschwindet beim Tippen und wird von manchem Vorleseprogramm gar nicht genannt — wer nicht sieht, wusste in der zweiten Zeile nicht mehr, in welchem Feld er steht.",
+          "Jedes der vier Felder trägt jetzt einen festen Namen. Am Bildschirm ändert sich nichts."
+        ]
+      }
+    ]
+  },
+  {
     version: "1.2",
     groups: [
       {
