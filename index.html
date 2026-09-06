@@ -45,13 +45,13 @@
         <div class="import-banner hidden" id="import-banner">
           <p>Es sind noch keine Spieler erfasst. Bestehende Daten (als JSON-Datei) können einmalig importiert werden.</p>
           <button class="btn success" id="btn-import-seed">Datendatei auswählen…</button>
-          <input type="file" id="import-file-input" accept="application/json" class="hidden" />
+          <input type="file" id="import-file-input" aria-label="Datendatei auswählen" accept="application/json" class="hidden" />
         </div>
 
         <div class="card">
           <div class="filter-bar">
             <input type="search" id="spieler-search" placeholder="Suche nach Name oder Verein…" />
-            <select id="filter-status">
+            <select id="filter-status" aria-label="Nach Status filtern">
               <option value="">Alle Status</option>
               <option value="neu">🆕 Neu gesichtet</option>
               <option value="kontakt">📞 Kontakt läuft</option>
@@ -59,8 +59,8 @@
               <option value="gewechselt">✅ Gewechselt</option>
               <option value="abgesagt">❌ Kein Wechsel</option>
             </select>
-            <select id="filter-zustaendigkeit"><option value="">Alle Zuständigen</option></select>
-            <select id="filter-position"><option value="">Alle Positionen</option></select>
+            <select id="filter-zustaendigkeit" aria-label="Nach Zuständigkeit filtern"><option value="">Alle Zuständigen</option></select>
+            <select id="filter-position" aria-label="Nach Position filtern"><option value="">Alle Positionen</option></select>
             <span class="filter-count" id="spieler-count"></span>
           </div>
 
