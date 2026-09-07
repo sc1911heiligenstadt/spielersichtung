@@ -255,9 +255,31 @@ function renderVereinListe() {
   document.getElementById("verein-empty").classList.toggle("hidden", list.length > 0);
 }
 
-// ---------- Version / Changelog / Nutzer ----------
+// ---------- Funktionen / Version / Changelog / Nutzer ----------
+
+// Was die App kann — die Karte „Funktionen“ im Info-Reiter. Nutzt dieselben
+// CSS-Klassen wie frueher die Aenderungsliste (.changelog-group, .cg-title,
+// .cg-items), damit beide Karten gleich aussehen.
+function renderFunktionen() {
+  const container = document.getElementById("funktionen-list");
+  if (!container) return;
+  container.innerHTML = APP_FUNKTIONEN.map((g) => `
+    <div class="changelog-group">
+      <div class="cg-title">${escapeHtml(g.title)}</div>
+      <ul class="cg-items">${g.items.map((i) => `<li>${escapeHtml(i)}</li>`).join("")}</ul>
+    </div>
+  `).join("");
+}
+
+// Die Aenderungsliste steht seit 07.09.2026 NICHT mehr im Info-Reiter: dort
+// sollen nur die Funktionen der App stehen. APP_CHANGELOG bleibt in config.js
+// gepflegt und wird weiter geschrieben — es ist die Quelle fuer die Anleitung
+// und fuer die Neuigkeiten-Meldungen auf der Startseite der Tools-Uebersicht.
+// Diese Funktion steigt darum still aus, wenn es das Ziel nicht gibt.
+// Die Versionspille im Info-Reiter ist mit weggefallen; #version-badge bleibt
+// im Selektor, weil in dieser Flotte die Kopfzeile ihn tragen kann.
 function renderVersionInfo() {
-  document.querySelectorAll("#version-badge, #version-badge-2").forEach((el) => { if (el) el.textContent = "v" + APP_VERSION; });
+  document.querySelectorAll("#version-badge").forEach((el) => { if (el) el.textContent = "v" + APP_VERSION; });
   const list = document.getElementById("changelog-list");
   if (!list) return;
   list.innerHTML = APP_CHANGELOG.map((entry) => `
@@ -287,6 +309,7 @@ function renderAll() {
   populateDatalists();
   renderSpielerListe();
   renderVereinListe();
+  renderFunktionen();
   renderVersionInfo();
 }
 
@@ -512,7 +535,7 @@ function switchTab(tab) {
   document.querySelectorAll(".tab-section").forEach((s) => s.classList.toggle("active", s.id === "tab-" + tab));
   if (tab === "spieler") renderSpielerListe();
   if (tab === "vereine") renderVereinListe();
-  if (tab === "info") renderVersionInfo();
+  if (tab === "info") { renderFunktionen(); renderVersionInfo(); }
 }
 
 // ---------- Gateway: Laden / Speichern / Konflikte ----------

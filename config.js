@@ -54,7 +54,105 @@ const EXPORT_FIELD_GROUPS = [
   }
 ];
 
+// Was die App kann — steht im Info-Reiter als Karte "Funktionen".
+// WICHTIG: Das ist NICHT der Changelog. Hier steht der ZUSTAND ("der Status
+// ergibt sich von selbst"), dort die Aenderung ("der Status ergibt sich JETZT
+// von selbst"). Wer eine Funktion umbaut oder abschaltet, zieht diesen Text
+// mit — und ebenso E:\SC1911-Tools-Anleitung.txt, wo dasselbe ausfuehrlich steht.
+const APP_FUNKTIONEN = [
+  {
+    title: "Wofür die App da ist",
+    items: [
+      "Sichtung und Bewertung von neuen oder externen Nachwuchsspielern — als Grundlage für Kader- und Förderentscheidungen.",
+      "Festgehalten wird der ganze Vorgang: von der Beobachtung über die Gespräche mit Verein und Eltern bis zum Probetraining und der Rückmeldung danach.",
+      "Sie ersetzt die frühere Excel-Liste des Sichtungsbereichs."
+    ]
+  },
+  {
+    title: "Spielerliste",
+    items: [
+      "Liste aller gesichteten Spieler mit einer Suche über Name und Verein sowie Filtern nach Status, Zuständigkeit und Position.",
+      "Über der Liste steht, wie viele Einträge die eingestellte Sicht zeigt und wie viele es insgesamt gibt.",
+      "Der Status ergibt sich von selbst aus dem Stand des Vorgangs: neu gesichtet, Kontakt läuft, Probetraining bestätigt, gewechselt oder kein Wechsel."
+    ]
+  },
+  {
+    title: "Detailformular je Spieler",
+    items: [
+      "Person, Stützpunkt, Scouting-Einschätzung, Kontaktverlauf, Probetraining und die Wechsel-Entscheidung stehen in einem Fenster.",
+      "„Sichtung durch“ und „Zuständigkeit“ sind bei einem neuen Spieler mit dem eigenen Namen vorbelegt und bleiben änderbar.",
+      "Das Datum der letzten Bearbeitung setzt die App selbst — es muss nichts nachgetragen werden.",
+      "Das Feld „Wechsel“ ist ein Freitext. Jeder Text, der mit „ja“ beginnt, zählt als Wechsel, jeder mit „nein“ als Absage — ein Zusatz wie „Ja, zum 01.07.“ ist also erlaubt."
+    ]
+  },
+  {
+    title: "Vereinsverzeichnis",
+    items: [
+      "Kontaktdaten der gescouteten Vereine mit Anschrift, Website und mehreren Ansprechpartnern je Verein.",
+      "Suche über Vereinsname und Ort.",
+      "Jede Kontaktzeile trägt feste Feldnamen, damit Vorleseprogramme sie benennen können."
+    ]
+  },
+  {
+    title: "Export",
+    items: [
+      "CSV-Export der Spielerliste, frei zusammenstellbar: jedes Feld aus Person, Stützpunkt, Scouting, Kontaktverlauf und Entscheidung ist einzeln wählbar.",
+      "Der Export übernimmt die gerade eingestellte Suche und Filterung.",
+      "Der Export steht hinter dem Bearbeiten-Recht — wer nur sehen darf, bekommt ihn nicht."
+    ]
+  },
+  {
+    title: "Grenzen",
+    items: [
+      "Hier stehen personenbezogene Daten von Spielern, oft Minderjährigen, die noch bei einem anderen Verein spielen. Ein Eintrag ist ein Arbeitsstand, kein Archiv — was nicht mehr gebraucht wird, gehört gelöscht.",
+      "Die App verschickt nichts: keine Einladung, keine Nachricht an Verein oder Eltern. Sie hält nur fest, was geschehen ist.",
+      "Ein Einlesen aus einer Datei ist nur möglich, solange noch kein Spieler erfasst ist.",
+      "Der Kader des eigenen Vereins gehört nicht hierher, sondern in den Kadermanager."
+    ]
+  },
+  {
+    title: "Wer darf was",
+    items: [
+      "Sehen: Spielerliste, Detailansicht und Vereinsverzeichnis, schreibgeschützt. Das Fenster geht auf, die Felder sind gesperrt, Speichern und Löschen fehlen.",
+      "Bearbeiten: Spieler und Vereine anlegen, ändern und löschen. Dazu der CSV-Export.",
+      "Neu anlegen bleibt Bearbeitern vorbehalten.",
+      "Der Reiter „Info“ ist für alle sichtbar."
+    ]
+  },
+  {
+    title: "Bedienung am Handy",
+    items: [
+      "Die Ansicht ist für das Handy gebaut und funktioniert dort vollständig.",
+      "Die Reiterleiste bricht am Handy um, statt seitlich aus dem Bild zu laufen.",
+      "Eingabefelder sind mindestens 16 Pixel groß, damit der iPhone-Browser beim Antippen nicht ungefragt in die Seite hineinzoomt."
+    ]
+  },
+  {
+    title: "Daten und Speicherung",
+    items: [
+      "Gespeichert wird in der Vereins-Nextcloud über die zentrale Anmeldung der Tools-Übersicht — ein eigenes Passwort braucht es nicht.",
+      "Im Kopfbereich steht sichtbar, ob der letzte Stand gespeichert wurde.",
+      "Das Speichern startet ohne Verzögerung. Wird die Seite geschlossen, bevor die Bestätigung da ist, geht der Stand trotzdem noch raus.",
+      "Ändern zwei Geräte gleichzeitig denselben Stand, erkennt die App das und meldet es.",
+      "Fällt die Anmeldung weg, während die App offen ist, wird der Bildschirm geräumt — die Seite selbst und auch der Spieler- und der Verein-Dialog daneben."
+    ]
+  }
+];
+
 const APP_CHANGELOG = [
+  {
+    version: "1.4",
+    groups: [
+      {
+        title: "Im Info-Reiter steht jetzt, was die App kann",
+        items: [
+          "Die Liste der Änderungen und die Versionsnummer sind aus dem Info-Reiter verschwunden.",
+          "Stattdessen steht dort die Karte „Funktionen“: was die App kann, nach Themen geordnet.",
+          "Was sich geändert hat, steht weiterhin in den Neuigkeiten auf der Startseite der Tools-Übersicht."
+        ]
+      }
+    ]
+  },
   {
     version: "1.3",
     groups: [
